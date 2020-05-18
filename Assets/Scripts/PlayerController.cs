@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
 
         //Shooting Coroutine
-        StartCoroutine("Shoot");
+        StartCoroutine(Shoot());
 
         //Rotation Function
         PlayerRotation();
@@ -70,18 +70,23 @@ public class PlayerController : MonoBehaviour
             //If the Raycats collision with something
             if (hitInfo)
             {
-                //Work Later
-                Debug.Log("Collision");
-            }
+                //Assign the position of the Line with a Collision
+                line.SetPosition(0, gunPosition.position);
+                line.SetPosition(1, hitInfo.transform.position);
 
-            //Assign the position of the Line
-            line.SetPosition(0, gunPosition.position);
-            line.SetPosition(1, mousePosition);
+                hitInfo.transform.gameObject.GetComponent<Enemy_Controller>().EnemyDamage();
+            }
+            else
+            {
+                //Assign the position of the Line
+                line.SetPosition(0, gunPosition.position);
+                line.SetPosition(1, mousePosition);
+            }
 
             //Enabled the line
             line.enabled = true;
 
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(.05f);
 
             //Disable the line
             line.enabled = false;
