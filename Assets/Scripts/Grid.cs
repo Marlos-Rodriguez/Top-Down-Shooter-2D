@@ -79,7 +79,7 @@ public class Grid<TGridObject>
         textMesh.anchor = textAnchor;
         textMesh.alignment = textAlignment;
         textMesh.fontSize = fontSize;
-        textMesh.text = text;
+        textMesh.text = "";
         textMesh.color = color;
         textMesh.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
         return textMesh;
@@ -95,11 +95,15 @@ public class Grid<TGridObject>
         return height;
     }
 
+    public float GetCellSize()
+    {
+        return cellsize;
+    }
     private Vector3 GetWorldPosition(int x, int y)
     {
         return new Vector3(x, y) * cellsize + originPosition;
     }
-    private void GetXY(Vector3 worldPosition, out int x, out int y)
+    public void GetXY(Vector3 worldPosition, out int x, out int y)
     {
         x = Mathf.FloorToInt((worldPosition - originPosition).x / cellsize);
         y = Mathf.FloorToInt((worldPosition - originPosition).y / cellsize);

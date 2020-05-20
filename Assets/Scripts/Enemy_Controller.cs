@@ -9,8 +9,6 @@ public class Enemy_Controller : MonoBehaviour
 
     private Vector3 startPosition;
 
-    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -26,16 +24,10 @@ public class Enemy_Controller : MonoBehaviour
         if (!life) Dead();  //If the life is false call the Dead Function
     }
 
-    private Vector3 GetRoamingPostion()
-    {
-       return startPosition + 
-       new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 
-       Random.Range(10f, 70f);
-    }
-
     private void Dead()
     {
         //Work later
         Debug.Log("SE MURIO");
+        GetComponent<EnemyIA>().Dead();
     }
 }
